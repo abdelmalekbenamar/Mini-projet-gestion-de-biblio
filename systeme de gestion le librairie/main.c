@@ -10,9 +10,26 @@ int affichageMenu(){
     return choix;
 }
 
-void ajouterLivre(char *tableau, char titre, char auteur, char prix, char qtte){
-    printf("%s est le titre, %s auteur, %s prix, %s qtte\n");
-    printf("%s", tableau[0][1]);
+void ajouterLivre(char tableau[100][4][35], int nbrLivres){
+    printf("Veuillez taper les informations suivantes :\nLe nom du livre:");
+    char titre[100];
+    scanf(" %[^\n]s", titre);
+    printf("L'auteur du livre :");
+    char auteur[100];
+    scanf(" %[^\n]s", auteur);
+    printf("Le prix du livre :");
+    char prix[100];
+    scanf("%s", prix);
+    printf("La quantite du livre :");
+    char qtte[100];
+    scanf("%s", qtte);
+    strcpy(tableau[nbrLivres][0], titre);
+    strcpy(tableau[nbrLivres][1], auteur);
+    strcpy(tableau[nbrLivres][2], prix);
+    strcpy(tableau[nbrLivres][3], qtte);
+    nbrLivres++;
+    //printf("\n\ntitre : %s -- auteur : %s -- prix : %s -- qtte : %s", tableau[nbrLivres][0], tableau[nbrLivres][1], tableau[nbrLivres][2], tableau[nbrLivres][3]);
+
 }
 
 int main()
@@ -21,14 +38,18 @@ int main()
 
 
     //int test = affichageMenu();
-    //printf("%d", test);
-    //int nbrLignes = 0;
-    char tableau[100][4][45] = {{"abdelmalek", "ben", "45"},{"abdelmalek", "ben", "45"},};
+    int nbrLivres = 0;
+
+    /*char tableau[100][4][35] = {{"alice", "ben", "45dh","100"},{"enfant noir", "kamara", "25dh", "200"},};
+    */
+ /*
     printf("%s\n", tableau[0][0]);
     char texte[] = "que du text";
     strcpy(tableau[0][0], texte);
     printf("%s", tableau[0][0]);
-
+*/
+    char tableau[100][4][35];
+    ajouterLivre(tableau, nbrLivres);
 
     return 0;
 }

@@ -1,5 +1,6 @@
 # depslib dependency file v1.0
-1725447196 source:c:\users\youco\desktop\systeme de gestion de librairie\systeme de gestion le librairie\main.c
+1725548239 source:c:\users\youco\desktop\systeme de gestion de librairie\systeme de gestion le librairie\main.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 
