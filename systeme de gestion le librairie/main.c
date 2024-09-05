@@ -62,13 +62,22 @@ int rechercherLivre(char tableau[100][4][35]){
         }
     }
     if(indiceLivre)
-        return indiceLivre - 1;
+        return indiceLivre;
     else
         return -1;
 }
 
 void miseAJourQuantiteLivre(char tableau[100][4][35]){
     int indiceLivre = rechercherLivre(tableau);
+    if(indiceLivre == -1){
+        printf("livre n'est pas trouve");
+    }
+    else if(indiceLivre){
+        int quantiteLivre;
+        printf("Entrer la quantite de livre voulu :");
+        scanf("%d", &quantiteLivre);
+        strcpy(tableau[indiceLivre - 1][3],quantiteLivre);
+    }
 
 }
 
