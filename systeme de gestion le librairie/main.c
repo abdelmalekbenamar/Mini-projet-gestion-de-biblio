@@ -39,6 +39,38 @@ void afficherTousLivres(char tableau[100][4][35]){
         printf("%s\n", tableau[i][0]);
     }
 }
+int rechercherLivre(char tableau[100][4][35]){
+    char nomEntre[100];
+    char nomTableau[100];
+    int indiceLivre;
+    printf("Veuillez entrer le nom du livre à rechercher :");
+    scanf(" %[^\n]s", nomEntre);
+    for(int i = 0; i < strlen(nomEntre); i++){
+        nomEntre[i] = toupper(nomEntre[i]);
+    }
+    //printf("\n%s\n", nomEntre);
+    for(int j = 0; j < nbrLivres; j++){
+        strcpy(nomTableau, tableau[j][0]);
+
+        for(int k = 0; k < strlen(nomTableau); k++){
+            nomTableau[k] = toupper(nomTableau[k]);
+        }
+        if(strcmp(nomTableau, nomEntre) == 0){
+            printf("le livre %s est trouvee, son auteur est : %s", tableau[j][0], tableau[j][1]);
+            indiceLivre = j +1;
+            break;
+        }
+    }
+    if(indiceLivre)
+        return indiceLivre - 1;
+    else
+        return -1;
+}
+
+void miseAJourQuantiteLivre(char tableau[100][4][35]){
+    int indiceLivre = rechercherLivre(tableau);
+
+}
 
 int main()
 {
@@ -56,10 +88,13 @@ int main()
     printf("%s", tableau[0][0]);
 */
     char tableau[100][4][35];
+
     ajouterLivre(tableau);
     ajouterLivre(tableau);
-    ajouterLivre(tableau);
+    //ajouterLivre(tableau);
     afficherTousLivres(tableau);
 
+
+    printf("%d",rechercherLivre(tableau));
     return 0;
 }
