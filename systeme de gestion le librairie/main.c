@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+int nbrLivres = 0;
 int affichageMenu(){
     printf("1- Ajouter un livre\n2- Afficher tous les livres\n3- Rechercher un livre par son titre\n4- Mettre a jour la quantite d'un livre\n5- Supprimer un livre du stock\n6- Afficher le nombre total de livres en stock\n\n");
     printf("Veuillez choisir le nombre d'une option :");
@@ -10,7 +11,7 @@ int affichageMenu(){
     return choix;
 }
 
-void ajouterLivre(char tableau[100][4][35], int nbrLivres){
+void ajouterLivre(char tableau[100][4][35]){
     printf("Veuillez taper les informations suivantes :\nLe nom du livre:");
     char titre[100];
     scanf(" %[^\n]s", titre);
@@ -27,9 +28,16 @@ void ajouterLivre(char tableau[100][4][35], int nbrLivres){
     strcpy(tableau[nbrLivres][1], auteur);
     strcpy(tableau[nbrLivres][2], prix);
     strcpy(tableau[nbrLivres][3], qtte);
-    nbrLivres++;
+    nbrLivres = nbrLivres + 1;
+    printf("nombre de livres est : %d\n", nbrLivres);
     //printf("\n\ntitre : %s -- auteur : %s -- prix : %s -- qtte : %s", tableau[nbrLivres][0], tableau[nbrLivres][1], tableau[nbrLivres][2], tableau[nbrLivres][3]);
 
+}
+void afficherTousLivres(char tableau[100][4][35]){
+    int i;
+    for(i = 0; i < nbrLivres; i++){
+        printf("%s\n", tableau[i][0]);
+    }
 }
 
 int main()
@@ -38,7 +46,6 @@ int main()
 
 
     //int test = affichageMenu();
-    int nbrLivres = 0;
 
     /*char tableau[100][4][35] = {{"alice", "ben", "45dh","100"},{"enfant noir", "kamara", "25dh", "200"},};
     */
@@ -49,7 +56,10 @@ int main()
     printf("%s", tableau[0][0]);
 */
     char tableau[100][4][35];
-    ajouterLivre(tableau, nbrLivres);
+    ajouterLivre(tableau);
+    ajouterLivre(tableau);
+    ajouterLivre(tableau);
+    afficherTousLivres(tableau);
 
     return 0;
 }
