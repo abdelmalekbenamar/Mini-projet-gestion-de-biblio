@@ -3,13 +3,8 @@
 #include <string.h>
 
 int nbrLivres = 0;
-int affichageMenu(){
-    printf("1- Ajouter un livre\n2- Afficher tous les livres\n3- Rechercher un livre par son titre\n4- Mettre a jour la quantite d'un livre\n5- Supprimer un livre du stock\n6- Afficher le nombre total de livres en stock\n\n");
-    printf("Veuillez choisir le nombre d'une option :");
-    int choix;
-    scanf("%d", &choix);
-    return choix;
-}
+int choixMenu = 0;
+
 
 void ajouterLivre(char tableau[100][4][35]){
     printf("Veuillez taper les informations suivantes :\nLe nom du livre:");
@@ -29,7 +24,7 @@ void ajouterLivre(char tableau[100][4][35]){
     strcpy(tableau[nbrLivres][2], prix);
     strcpy(tableau[nbrLivres][3], qtte);
     nbrLivres = nbrLivres + 1;
-    printf("nombre de livres est : %d\n", nbrLivres);
+    //printf("nombre de livres est : %d\n", nbrLivres);
     //printf("\n\ntitre : %s -- auteur : %s -- prix : %s -- qtte : %s", tableau[nbrLivres][0], tableau[nbrLivres][1], tableau[nbrLivres][2], tableau[nbrLivres][3]);
 
 }
@@ -75,9 +70,12 @@ void miseAJourQuantiteLivre(char tableau[100][4][35]){
     }
     else if(indiceLivre){
         int quantiteLivre;
+        indiceLivre--;
         printf("Entrer la quantite de livre voulu :");
         scanf("%d", &quantiteLivre);
-        strcpy(tableau[indiceLivre - 1][3],quantiteLivre);
+        sprintf(tableau[indiceLivre][3], "%d", quantiteLivre);
+        printf("le livre %s est de quantite %d maintenant \n", tableau[indiceLivre][0], quantiteLivre);
+
     }
 
 }
@@ -103,33 +101,54 @@ void supprimerUnLivre(char tableau[100][4][35]){
         strcpy(tableau[nbrLivres - 1][1], "\n");
         strcpy(tableau[nbrLivres - 1][2], "\n");
         strcpy(tableau[nbrLivres - 1][3], "\n");
+        nbrLivres--;
     }
+}
+
+
+void affichageMenu( char tableau[100][4][35]){
+
+        printf("===============================================\n");
+        printf("1- Ajouter un livre\n2- Afficher tous les livres\n3- Rechercher un livre par son titre\n4- Mettre a jour la quantite d'un livre\n5- Supprimer un livre du stock\n6- Afficher le nombre total de livres en stock\n\n");
+        printf("Veuillez choisir le nombre d'une option :");
+        scanf("%d", &choixMenu);
+        switch(choixMenu){
+    case 1:
+        ajouterLivre(tableau);
+        affichageMenu(tableau);
+        break;
+    case 2:
+        afficherTousLivres(tableau);
+        affichageMenu(tableau);
+        break;
+    case 3:
+        rechercherLivre(tableau);
+        affichageMenu(tableau);
+        break;
+    case 4:
+        miseAJourQuantiteLivre(tableau);
+        affichageMenu(tableau);
+        break;
+    case 5:
+        supprimerUnLivre(tableau);
+        affichageMenu(tableau);
+        break;
+    case 6:
+        printf("\nLe nombre de livre est %d :\n", nbrLivres);
+        affichageMenu(tableau);
+    }
+
 }
 
 int main()
 {
 
-
-
-    //int test = affichageMenu();
-
-    /*char tableau[100][4][35] = {{"alice", "ben", "45dh","100"},{"enfant noir", "kamara", "25dh", "200"},};
-    */
- /*
-    printf("%s\n", tableau[0][0]);
-    char texte[] = "que du text";
-    strcpy(tableau[0][0], texte);
-    printf("%s", tableau[0][0]);
-*/
     char tableau[100][4][35];
+    affichageMenu(tableau);
 
-    ajouterLivre(tableau);
 
-    ajouterLivre(tableau);
-    afficherTousLivres(tableau);
 
-    supprimerUnLivre(tableau);
-    afficherTousLivres(tableau);
+
 
 
     return 0;
