@@ -39,6 +39,7 @@ void afficherTousLivres(char tableau[100][4][35]){
         printf("%s\n", tableau[i][0]);
     }
 }
+
 int rechercherLivre(char tableau[100][4][35]){
     char nomEntre[100];
     char nomTableau[100];
@@ -56,7 +57,7 @@ int rechercherLivre(char tableau[100][4][35]){
             nomTableau[k] = toupper(nomTableau[k]);
         }
         if(strcmp(nomTableau, nomEntre) == 0){
-            printf("le livre %s est trouvee, son auteur est : %s", tableau[j][0], tableau[j][1]);
+            //printf("le livre %s est trouvee, son auteur est : %s", tableau[j][0], tableau[j][1]);
             indiceLivre = j +1;
             break;
         }
@@ -80,6 +81,30 @@ void miseAJourQuantiteLivre(char tableau[100][4][35]){
     }
 
 }
+void supprimerUnLivre(char tableau[100][4][35]){
+    int indiceLivre = rechercherLivre(tableau);
+    if(indiceLivre == nbrLivres){
+        indiceLivre--;
+        strcpy(tableau[indiceLivre][0],"\n");
+        strcpy(tableau[indiceLivre][1],"\n");
+        strcpy(tableau[indiceLivre][2],"\n");
+        strcpy(tableau[indiceLivre][3],"\n");
+        nbrLivres--;
+    }else if(indiceLivre < nbrLivres && indiceLivre > 0){
+        indiceLivre--;
+
+        for(indiceLivre; indiceLivre < nbrLivres - 1; indiceLivre++){
+            strcpy(tableau[indiceLivre][0], tableau[indiceLivre + 1][0]);
+            strcpy(tableau[indiceLivre][1], tableau[indiceLivre + 1][1]);
+            strcpy(tableau[indiceLivre][2], tableau[indiceLivre + 1][2]);
+            strcpy(tableau[indiceLivre][3], tableau[indiceLivre + 1][3]);
+        }
+        strcpy(tableau[nbrLivres - 1][0], "\n");
+        strcpy(tableau[nbrLivres - 1][1], "\n");
+        strcpy(tableau[nbrLivres - 1][2], "\n");
+        strcpy(tableau[nbrLivres - 1][3], "\n");
+    }
+}
 
 int main()
 {
@@ -99,11 +124,13 @@ int main()
     char tableau[100][4][35];
 
     ajouterLivre(tableau);
+
     ajouterLivre(tableau);
-    //ajouterLivre(tableau);
+    afficherTousLivres(tableau);
+
+    supprimerUnLivre(tableau);
     afficherTousLivres(tableau);
 
 
-    printf("%d",rechercherLivre(tableau));
     return 0;
 }
